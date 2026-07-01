@@ -1,18 +1,21 @@
+# 初步认识python
 print("hello world")
 print("goodbye world")
 print("I love python")
 
 
 """
-author:何冠臻
 date：2026/7/01
 """
 # hello world
 print("你好，世界")
 
+
+
+# python中的变量
 """
 使用变量保存数据并进行加减乘除运算
-author:何冠臻
+
 date：2026/7/01
 """
 a = 12
@@ -24,7 +27,7 @@ print(a/b)
 
 """
 使用type函数检查变量的类型
-author:何冠臻
+
 date：2026/7/01
 """
 a=12
@@ -38,7 +41,7 @@ print(type(d))
 
 """
 变量的类型转换操作
-author:何冠臻
+
 date：2026/7/01
 """
 a=12
@@ -56,9 +59,10 @@ print(float(e))
 print(str(f))
 
 
+#python中的运算符
 """
 算术运算符
-author:何冠臻
+
 date：2026/7/01
 """
 print(12+14)
@@ -70,7 +74,7 @@ print(12%14)
 
 """
 算术运算的优先级
-author:何冠臻
+
 date：2026/7/01
 """
 a=12
@@ -81,7 +85,7 @@ print((a+b)*5**2)
 
 """
 赋值运算符和复合赋值运算符
-author:何冠臻
+
 date：2026/7/01
 """
 a=12
@@ -93,7 +97,7 @@ print(a)
 
 """
 海象运算符
-author:何冠臻
+
 date：2026/7/01
 """
 print(a:=10)
@@ -101,7 +105,7 @@ print(a)
 
 """
 比较运算符和逻辑运算符的使用
-author:何冠臻
+
 date：2026/7/01
 """
 a=12 == 19
@@ -112,11 +116,9 @@ e = not c
 print(f'a={a},b={b},c={c},d={d},e={e}')
 print(f'f={a or b}')
 
-
-
 """
 将华氏温度转换为摄氏温度
-author:何冠臻
+
 version：1.0
 date：2026/7/01
 """
@@ -126,7 +128,7 @@ print('摄氏温度为:%.2f'%C)
 #  C = (F-32)/1.8
 """
 将华氏温度转换为摄氏温度
-author:何冠臻
+
 version：1.1
 date：2026/7/01
 """
@@ -136,7 +138,7 @@ print(f'摄氏温度为：{C:.2f}')
 
 """
 输入半径计算圆的周长和面积
-author:何冠臻
+
 version：1.0
 date：2026/7/01
 """
@@ -148,7 +150,7 @@ print('面积:%.2f'%r)
 
 """
 输入半径计算圆的周长和面积
-author:何冠臻
+
 version：1.1
 date：2026/7/01
 """
