@@ -57,15 +57,14 @@ Craps赌博游戏
 import random
 
 money = 1000
-print(f'🟢你有{money}$')
-
 while money > 0:
+    print(f'🟢你有{money}$')
     while True:
         debt = int(input("🟡🟡🟡请下注："))
         if 0 < debt <= money:
             break
     print('--------- GAME START‼️---------')
-    first_point = random.randint(1,7) +random.randint(1,7)
+    first_point = random.randint(1,6) +random.randint(1,6)
     print(f'玩家摇出{first_point}点')
     if first_point == 7 or first_point == 11:
         print('玩家赢💵\n')
@@ -76,7 +75,7 @@ while money > 0:
     else:
         print('--------- 下一轮‼️ ---------')
         while True:
-            current_point = random.randint(1,7) +random.randint(1,7)
+            current_point = random.randint(1,6) +random.randint(1,6)
             print(f'玩家摇出{current_point}点')
             if current_point == 7:
                 print('庄家赢💸\n')
