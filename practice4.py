@@ -35,7 +35,7 @@ for num in range(100,1000):
 """
 num = int(input("请输入一个正整数："))
 reversed_num = 0
-while num >=0:
+while num >0:
     reversed_num = reversed_num * 10 + num % 10
     num //= 10
 print(f'翻转后的数字:{reversed_num}')
@@ -47,7 +47,7 @@ print(f'翻转后的数字:{reversed_num}')
 for x in range(0,21):
     for y in range(0,34):
         z = 100-x-y
-        if x * 5 + y * 3 + z / 3 == 100:
+        if z % 3 == 0 and x * 5 + y * 3 + z // 3 == 100:
             print(f'公鸡有{x}只,母鸡有{y}只,小鸡有{z}只')
 
 """
@@ -65,7 +65,7 @@ while money > 0:
         if 0 < debt <= money:
             break
     print('--------- GAME START‼️---------')
-    first_point = random.randrange(1,7) +random.randrange(1,7)
+    first_point = random.randint(1,7) +random.randint(1,7)
     print(f'玩家摇出{first_point}点')
     if first_point == 7 or first_point == 11:
         print('玩家赢💵\n')
@@ -76,15 +76,14 @@ while money > 0:
     else:
         print('--------- 下一轮‼️ ---------')
         while True:
-            current_point = random.randrange(1,7) +random.randrange(1,7)
+            current_point = random.randint(1,7) +random.randint(1,7)
             print(f'玩家摇出{current_point}点')
             if current_point == 7:
                 print('庄家赢💸\n')
                 money -= debt
                 break
-            else:
-                if current_point == first_point:
-                    print('玩家赢💵\n')
-                    money += debt
-                    break
+            elif current_point == first_point:
+                print('玩家赢💵\n')
+                money += debt
+                break
 print('你已经破产了⚠️')
