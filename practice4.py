@@ -1,6 +1,8 @@
 """
 输出100以内的素数
 """
+import time
+
 for num in range(2,101):
     is_prime = True
     end = int(num ** 0.5)
@@ -54,17 +56,19 @@ for x in range(0,21):
 Craps赌博游戏
 """
 
-import random
+import random,time
 
 money = 1000
 while money > 0:
-    print(f'🟢你有{money}$')
+    print(f'🟢🟢🟢你有{money}$')
     while True:
         debt = int(input("🟡🟡🟡请下注："))
         if 0 < debt <= money:
             break
     print('--------- GAME START‼️---------')
     first_point = random.randint(1,6) +random.randint(1,6)
+    # 设置时间间隔模拟摇骰子的过程
+    time.sleep(2)
     print(f'玩家摇出{first_point}点')
     if first_point == 7 or first_point == 11:
         print('玩家赢💵\n')
@@ -73,9 +77,10 @@ while money > 0:
         print('庄家赢💸\n')
         money -= debt
     else:
-        print('--------- 下一轮‼️ ---------')
+        print('--------- 下一轮‼️ -------------')
         while True:
             current_point = random.randint(1,6) +random.randint(1,6)
+            time.sleep(2)
             print(f'玩家摇出{current_point}点')
             if current_point == 7:
                 print('庄家赢💸\n')
