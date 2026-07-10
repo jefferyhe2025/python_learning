@@ -47,7 +47,7 @@ else:
 Version: 1.0
 """
 
-x = int(input("请输入x的值："))
+x = int(input('请输入x的值'))
 if x < -1:
     y = 5 * x + 3
     print(f'{y = }')
