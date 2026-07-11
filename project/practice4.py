@@ -66,7 +66,8 @@ while money > 0:
         debt = int(input("🟡🟡🟡请下注："))
         if 0 < debt <= money:
             break
-    print('--------- GAME START‼️---------')
+     #用居中格式化打印
+    print('GAME START‼️'.center(22,'-'))
     first_point = random.randint(1,6) +random.randint(1,6)
     # 设置时间间隔模拟摇骰子的过程
     time.sleep(2)
@@ -78,7 +79,7 @@ while money > 0:
         print('庄家赢💸\n')
         money -= debt
     else:
-        print('--------- 下一轮‼️ -------------')
+        print('下一轮‼️'.center(20,'-'))
         while True:
             current_point = random.randint(1,6) +random.randint(1,6)
             time.sleep(2)
