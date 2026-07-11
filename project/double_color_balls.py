@@ -65,3 +65,33 @@ for i in range(n):
         f'[blue]{blue_ball:0>2d}[/blue]'
     )
 console.print(table)
+
+"""
+双色球随机选号程序
+version1.2
+"""
+RED_BALLS = [i for i in range(34)]
+BLUE_BALL = [i for i in range(17)]
+
+def choose():
+    """
+    将红球和蓝球随机选出放入选中号码列表中
+    :return: 号码列表
+    """
+    selected_balls = random.sample(RED_BALLS,6)
+    selected_balls.sorted()
+    selected_balls.append(random.choice(BLUE_BALL))
+    return selected_balls
+
+def display(balls):
+    """
+    格式化输出号码
+    :param balls: 生成的随机号码
+    """
+    for ball in balls[:-1]:
+        print(f'\033[031m{ball:0>2d}\033[0m', end=' ')
+    print(f'\033[034m{balls[-1]:0>2d}\033[0m')
+
+n = int(input('生成几注号码: '))
+for _ in range(n):
+    display(choose())
