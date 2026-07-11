@@ -55,7 +55,7 @@ for language in languages:
     print(language)
 
 """
-将一颗色子掷6000次，统计每种点数出现的次数(不熟练)
+将一颗色子掷6000次，统计每种点数出现的次数(已熟练)
 """
 import random
 counter = [0] * 6
@@ -143,7 +143,7 @@ for _ in range(5):
     scores.append(temp)
 print(scores)
 """
-产生随机数的方式来生成5个学生3门课程的成绩并保存在列表中(不熟练)
+产生随机数的方式来生成5个学生3门课程的成绩并保存在列表中(已熟练)
 """
 scores = [[random.randint(60,100) for _ in range(3)] for _ in range(5)]
 print(scores)
