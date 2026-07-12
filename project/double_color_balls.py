@@ -75,10 +75,10 @@ BLUE_BALL = [i for i in range(17)]
 
 def choose():
     """
-    将红球和蓝球随机选出放入选中号码列表中
+    生成号码列表
     :return: 号码列表
     """
-    selected_balls = random.sample(RED_BALLS,6)
+    selected_balls = random.sample(RED_BALLS,6) #⚠️对于sample()和append()返回对象不熟悉
     selected_balls.sorted()
     selected_balls.append(random.choice(BLUE_BALL))
     return selected_balls
@@ -86,11 +86,11 @@ def choose():
 def display(balls):
     """
     格式化输出号码
-    :param balls: 生成的随机号码
+    :param balls: 号码列表
     """
     for ball in balls[:-1]:
-        print(f'\033[031m{ball:0>2d}\033[0m', end=' ')
-    print(f'\033[034m{balls[-1]:0>2d}\033[0m')
+        print(f'\033[031m{ball:0>2d}\033[0m', end=' ') #格式化红色号码
+    print(f'\033[034m{balls[-1]:0>2d}\033[0m') #格式化蓝色号码
 
 n = int(input('生成几注号码: '))
 for _ in range(n):
