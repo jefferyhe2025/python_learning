@@ -5,12 +5,16 @@ import random,string
 #生成所有的数字和字母
 ALL_CHARS = string.digits + string.ascii_letters
 
-def generate_code(*,code_len=4): #强制关键字传参数
-    result = ''.join(random.choices(ALL_CHARS,k=code_len))
-    return result
+def generate_code(*,code_len=4):
+    """
+    生成随机验证码
+    :param code_len: 默认长度为4
+    """
+    print(''.join(random.choices(ALL_CHARS,k=code_len)))
 
-for _ in range(5):
-    print(generate_code())
+n = int(input('需要几行验证码：'))
+for _ in range(n):
+    generate_code()
 
 """
 例子2：判断素数
