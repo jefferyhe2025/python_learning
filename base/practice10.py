@@ -90,5 +90,5 @@ print(add(1,True,'hello',3.25,7))
 def foo(*args,**kwargs):
     print(args)
     print(kwargs)
-foo(3, 2.1, True, name='骆昊', age=43, gpa=4.95)
+foo(3, 2.1, True, name='冠臻', age=21, gpa=3.95)
 
