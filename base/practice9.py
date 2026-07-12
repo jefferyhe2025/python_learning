@@ -64,7 +64,7 @@ for key in person:
 """
 字典的方法
 """
-#获取键值
+#获取键值 （配合索引可完成一次成员判断和增加键值）
 person = {'name': '王大锤', 'age': 25, 'height': 178, 'addr': '成都市武侯区科华北路62号1栋101'}
 print(person.get('name'))
 print(person.get('family'))
@@ -104,7 +104,7 @@ count = {}
 
 for ch in sentence:
     if 'a' <= ch <= 'z' or 'A' <= ch <= 'Z':
-        count[ch] = count.get(ch,0) + 1 #索引添加key
+        count[ch] = count.get(ch,0) + 1 # 索引添加key，get()判断成员添加value
 sorted_keys = sorted(count,key=count.get,reverse=True)
 for key in sorted_keys:
     print(f'{key}出现的次数：{count[key]}')
