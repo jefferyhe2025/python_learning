@@ -5,8 +5,6 @@
 import operator
 import functools
 
-from project.practice4 import is_prime
-
 """
 累加器
 version1.0
@@ -47,7 +45,7 @@ print(calc(1,operator.mul,1,2,3,4,5,6))
 map函数和filter函数
 """
 def even(num):
-    """ 判断是否为素数 """
+    """ 判断是否为偶数 """
     return num % 2 == 0
 def square(num):
     """ 平方 """
@@ -75,9 +73,9 @@ print(new_strings)
 """
 Lambda函数(匿名函数)：实现只有一行功能的函数（需要加强这方面的理解）
 """
-old_num = [12,44,33,98,57]
-new_num = list(map(lambda x:x ** 2,filter(lambda x:x % 2 == 0,old_num)))
-print(new_num)
+old_nums = [12,44,33,98,57]
+new_nums = list(map(lambda x:x ** 2,filter(lambda x:x % 2 == 0,old_nums)))
+print(new_nums)
 
 #用lambda函数实现一行阶乘和判断素数
 fac = lambda n: functools.reduce(operator.mul,range(2,n + 1),1)
