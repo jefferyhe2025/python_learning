@@ -79,7 +79,7 @@ def choose():
     :return: 号码列表
     """
     selected_balls = random.sample(RED_BALLS,6) #⚠️对于sample()和append()返回对象不熟悉
-    selected_balls.sorted()
+    selected_balls.sort()
     selected_balls.append(random.choice(BLUE_BALL))
     return selected_balls
 
