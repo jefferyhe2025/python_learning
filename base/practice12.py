@@ -3,8 +3,7 @@
 """
 import random
 import time
-from functools import wraps
-from functools import lru_cache
+from functools import wraps,lru_cache
 
 def record_time(func):
     """ 记录时间的装饰器 """
@@ -23,12 +22,14 @@ def record_time(func):
 @record_time # 💻用语法糖的方式调用装饰器函数
 def download(filename):
     print(f'开始下载文件{filename}')
+    # 模拟下载时间（最多6秒）
     time.sleep(random.random() * 6)
     print(f'{filename}下载完成')
 
 @record_time
 def upload(filename):
     print(f'开始上传文件{filename}')
+    #模拟上传时间（最多8秒）
     time.sleep(random.random() * 8)
     print(f'{filename}上传完成')
 
@@ -54,16 +55,16 @@ def fac(num):
     return num * fac(num -1 )
 
 #递归打印斐波那契数列
-#装饰器解决fibl重复调用
+#装饰器解决fib1重复调用
 @lru_cache() #装饰器有参数需要()
-def fibl(n):
+def fib1(n):
     """ 递归打印斐波那契数列 """
     if n in (1,2):
         return 1
-    return fibl(n-1) + fibl(n-2)
+    return fib1(n-1) + fib1(n-2)
 
 for i in range(1,40):
-    print(fibl(i))
+    print(fib1(i))
 
 
 
