@@ -108,3 +108,114 @@ p1 = Point(3,4)
 p2 = Point(5,6)
 print(p1,p2) # 调用魔法方法
 print(f'p1到p2的距离为：{p1.distance_to(p2):.2f}')
+
+
+"""
+面向对象进阶：私有属性和动态属性
+"""
+#私有属性和动态属性
+#在初始化方法中可以将属性添加为私有属性，即不对外公开，外部接口不能调用这个对象的属性。
+#例如：self.__name = name,如果调用会引发 ⚠️AttributeError（属性错误）异常
+
+#动态属性
+#__slot__=()可以固定类属性，如果动态添加会引发 ⚠️AttributeError异常
+#值得注意的是对象的方法本质也是属性，如果给对象发送一个无法接收的消息，引发的异常仍然是AttributeError。
+class Fruit:
+    """ 新建水果类 """
+    __slot__ = ('name','is_ripe') #锁定水果两个属性
+    def __init__(self,name,is_ripe):
+        self.name = name
+        self.is_ripe = is_ripe
+
+    def ripen(self):
+        """让水果成熟"""
+        self.is_ripe = True
+apple = Fruit('苹果',False)
+print(f'这是{apple.name}')
+# apple.color = '红色' 为苹果动态添加颜色属性
+
+"""
+面向对象进阶：静态方法和类方法 -> 将类视为对象
+在面向对象中，对象方法、静态方法和类方法都可以通过类名.方法名()来调用
+"""
+class Triangle:
+    """ 三角形 """
+    def __init__(self,a,b,c):
+        """
+        三角形的边长
+        """
+        self.a = a
+        self.b = b
+        self.c = c
+
+    @staticmethod
+    def is_valid(a,b,c):
+        """ 检查三边能否构成三角形(静态方法) """
+        return a + b > c and b + c > a and a + c > b
+    # @classmethod
+    # def is_valid(cls,a,b,c):
+    #     """ 检查三边能否构成三角形(类方法) """
+    #     return a + b > c and b + c > a and a + c > b
+
+    @property
+    def perimeter(self):
+        """ 计算三角形的周长 """
+        return self.a + self.b + self.c
+    @property
+    def area(self):
+        p = self.perimeter / 2
+        return (p*(p-self.a)*(p-self.b)*(p-self.c)) ** 0.5
+
+if Triangle.is_valid(3,4,5):
+    t = Triangle(3,4,5)
+    # print(f'三角形的周长：{t.perimeter()}') 给对象发消息调用周长方法
+    # print(f'三角形的面积：{t.area()}') 给对象发消息调用面积方法
+    print(f'三角形的周长：{t.perimeter}') # 调用周长和面积属性
+    print(f'三角形的面积：{t.area}')
+
+"""
+继承
+"""
+class Person:
+    """ 父类人 """
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def eat(self):
+        print(f'{self.age}在吃饭')
+
+    def sleep(self):
+        print(f'{self.name}在睡觉')
+
+
+class Student(Person):
+    """ 子类学生 """
+
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def study(self,course_name):
+        print(f'{self.name}正在学习{course_name}')
+
+
+class Teacher(Person):
+    """ 子类老师 """
+
+    def __init__(self, name, age, title):
+        super().__init__(name, age)
+        self.title = title
+
+    def tech(self, course_name):
+        print(f'{self.title}{self.name}正在教授{course_name}')
+
+
+stu1 = Student('张三', 21)
+stu2 = Student('李四', 20)
+stu3 = Student('赵六',23)
+teacher1 = Teacher('王五', 34, '副教授')
+stu1.eat()
+stu2.sleep()
+stu3.study('C语言程序设计')
+teacher1.tech('计算机网络原理')
