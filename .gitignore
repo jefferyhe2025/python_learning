@@ -2,3 +2,6 @@
 __pycache__/
 .idea/
 .DS_Store
+.env
+*.env
+base/local_config.py
