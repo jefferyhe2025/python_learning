@@ -4,6 +4,7 @@
 按照黑桃、红心、草花、方块的顺序和点数从小到大排列，暂时不实现其他的功能。
 """
 import random
+from abc import ABCMeta,abstractmethod
 from enum import Enum
 
 
@@ -84,6 +85,56 @@ for player in players:
     player.arrange_card()
     print(f'{player.name}:',end='')
     print(player.cards)
+
+"""
+工资结算系统
+"""
+#要求：某公司有三种类型的员工，分别是部门经理、程序员和销售员。
+# 需要设计一个工资结算系统，根据提供的员工信息来计算员工的月薪。
+# 其中，部门经理的月薪为固定 15000 元；
+# 程序员按工作时间（以小时为单位）支付月薪，每小时 200 元；
+# 销售员的月薪由 1800 元底薪加上销售额 5% 的提成两部分构成。
+class Employee(metaclass=ABCMeta):
+    """ 抽象父类员工"""
+    def __init__(self,name):
+        self.name = name
+
+    @abstractmethod
+    def get_salary(self):
+        pass
+
+
+class Manager(Employee):
+    """ 部门经理 """
+    def get_salary(self):
+        return 15000.0
+
+class Programmer(Employee):
+    """ 程序员 """
+    def __int__(self,name,work_hours):
+        super().__init__(name)
+        self.work_hours = work_hours
+
+    def get_salary(self):
+        return 200 * self.work_hours
+
+class Salesman(Employee):
+    """ 销售 """
+    def __init__(self,name,sales=0):
+        super().__init__(name)
+        self.sales = sales
+
+    def get_salary(self):
+        return 1800 + self.sales ** 0.05
+
+#创建员工实例
+emps = [Manager('刘备'), Programmer('诸葛亮'), Manager('曹操'), Programmer('荀彧'), Salesman('张辽')]
+for emp in emps:
+    if isinstance(emp,Programmer): #判断员工类型
+        emp.work_hours = int(input('请输入工作时间：'))
+    elif isinstance(emp,Salesman):
+        emp.sales = int(input('请输入销售额：'))
+    print(f'{emp.name}本月工资为￥{emp.get_salary():.2f}元')
 
 
 
