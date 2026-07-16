@@ -3,15 +3,13 @@
 游戏需要将 52 张牌发到 4 个玩家的手上，每个玩家手上有 13 张牌，
 按照黑桃、红心、草花、方块的顺序和点数从小到大排列，暂时不实现其他的功能。
 """
+import random
 from enum import Enum
 
 
 class Suite(Enum):
     """ 花色的文字符号 """
     SPADE,HEART,CLUB,DIMOND = range(4) #用枚举的方式将文字符号替代数字🔢
-
-for suite in Suite:
-    print(f'{suite}: {suite.value}')
 
 class Card:
     def __init__(self,suite,face):
@@ -23,11 +21,71 @@ class Card:
         self.face = face
 
     def __repr__(self):
+        """ 与__str__类似，打印对象内容（面向开发者）"""
         suites = '♠♥♣♦'
         faces = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         return f'{suites[self.suite.value]}{faces[self.face]}'
 
-card1 = Card(Suite.SPADE, 5)
-card2 = Card(Suite.HEART, 13)
-print(card1)  # ♠5
-print(card2)  # ♥K
+    def __lt__(self, other):
+        """ 比较牌的大小 """
+        if self.suite == other.suite:
+            return self.face < other.face
+        return self.suite.value < other.suite.value
+
+class Poker:
+    """ 扑克 """
+    def __init__(self):
+        """ 创建52张牌，记录发牌位置"""
+        self.cards = [Card(suite,face)
+                      for suite in Suite
+                      for face in range(1,14)]
+        self.current = 0
+
+    def shuffle(self):
+        """ 洗牌 """
+        self.current = 0
+        return random.shuffle(self.cards)
+
+    def deal(self):
+        """ 发牌 """
+        card = self.cards[self.current]
+        self.current += 1
+        return  card
+
+    @property
+    def has_next(self):
+        """ 判断还有没有牌可以发 """
+        return self.current < len(self.cards)
+
+class Player:
+    """ 玩家 """
+    def __init__(self,name):
+        self.name = name
+        self.cards = []
+
+    def get_one(self,card):
+        """ 摸牌 """
+        return self.cards.append(card)
+
+    def arrange_card(self):
+        """ 理牌 """
+        return self.cards.sort()
+        #📝这里整理排序会对牌堆中Card类进行比大小，故而在Card类中添加了__lt__魔法方法
+
+poker = Poker()
+poker.shuffle()
+players = [Player('张三'),Player('李四'),Player('王五'),Player('赵六')]
+#发牌
+for _ in range(13):
+    for player in players:
+        player.get_one(poker.deal())
+#玩家理牌
+for player in players:
+    player.arrange_card()
+    print(f'{player.name}:',end='')
+    print(player.cards)
+
+
+
+
+
