@@ -14,7 +14,7 @@ my_dict = {
 }
 print(json.dumps(my_dict))
 #将字典处理成json格式并保存在文件中(序列化)
-with open('data.json','w') as file:
+with open('data.json','w') as file: #先创建json文件，再存储内容
     json.dump(my_dict,file)
 # #反序列化
 with open('data.json','r') as file:
@@ -27,12 +27,12 @@ with open('data.json','r') as file:
 申请网络接口:朋友圈文案
 """
 from local_config import API_KEY
-
+#🚀发送请求
 resp = requests.get(
     'https://apis.tianapi.com/pyqwenan/index',
-    params={'key': API_KEY}
+    params={'key': API_KEY} #传入API参数信息
 )
-data = resp.json()
+data = resp.json() #将请求发来的信息处理成字典格式
 
 if data.get('code') == 200:
     result = data['result']
