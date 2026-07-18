@@ -27,17 +27,41 @@ with open('data.json','r') as file:
 申请网络接口:朋友圈文案
 """
 from local_config import API_KEY
-#🚀发送请求
-resp = requests.get(
+# 🚀发送请求
+resp1 = requests.get(
     'https://apis.tianapi.com/pyqwenan/index',
     params={'key': API_KEY} #传入API参数信息
 )
-data = resp.json() #将请求发来的信息处理成字典格式
+data = resp1.json() #将请求发来的信息处理成字典格式
 
 if data.get('code') == 200:
+    # 打印消息
     result = data['result']
     print(result['content'])
     print(result.get('source', ''))
 else:
+    # 返回调用失败的信息
     print('调用失败:', data.get('code'), data.get('msg'))
+
+"""
+申请网络接口:AI新闻
+"""
+resp2 = requests.get(
+    'https://apis.tianapi.com/ai/index',
+    params={'key':API_KEY}
+)
+data_model = resp2.json()
+
+if data_model.get('code') == 200:
+    result = data_model['result']
+    # 逐条打印获取到的新闻
+    for news in result['newslist']:
+        print(news['ctime']) # 打印时间
+        print(news['title']) # 打印标题
+        print(news['description']) # 打印详情
+        print('-' * 60)
+else:
+    #返回调用失败的信息
+    print('调用失败：',data_model.get('code'),data_model.get('msg'))
+
 
