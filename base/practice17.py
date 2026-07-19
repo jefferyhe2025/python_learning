@@ -2,20 +2,23 @@ import re
 """
 正则表达式
 校验用户名和 QQ 号
+要求：用户名必须由字母、数字或下划线构成且长度在6~20个字符之间，QQ号是5~12的数字且首位不能为0
 """
-username = input('请输入用户名: ')
-qq = input('请输入QQ号: ')
 
-m1 = re.match(r'^[0-9a-zA-Z_]{6,20}$')
+username = input('请输入用户名：')
+qq = input('请输入QQ号：')
+
+#判断用户名是否有效
+m1 = re.match(r'^[0-9a-zA-Z_]{6,20}$',username)
 if not m1:
-    print('请输入有效的用户名.')
-
-m2 = re.fullmatch(r'[1-9]\d{4,11}', qq)
+    print('用户名无效！')
+#判断QQ号是否有效
+m2 = re.fullmatch(r'[1-9]\d{4,11}',qq)
 if not m2:
-    print('请输入有效的QQ号.')
+    print('QQ号无效！')
 
 if m1 and m2:
-    print('你输入的信息是有效的!')
+    print('您输入的信息有效！')
 
 """
 正则表达式
@@ -25,15 +28,18 @@ if m1 and m2:
 pattern = re.compile(r'(?<=\D)1[34578]\d{9}(?=\D)')
 sentence = '''重要的事情说8130123456789遍，我的手机号是13512346789这个靓号，
 不是15600998765，也不是110或119，王大锤的手机号才是15600998765。'''
+
 # 方法一：findall → 得到字符串列表
 tel_list = re.findall(pattern,sentence)
 for tel in tel_list:
     print(tel)
 print('--------华丽的分隔线--------')
+
 # 方法二：finditer → 迭代匹配对象，用 .group() 取内容
 for temp in pattern.finditer(sentence):
     print(temp.group())
 print('--------华丽的分隔线--------')
+
 # 方法三: 反复search，每次从上次结束位置找
 m = pattern.search(sentence)
 while m:
