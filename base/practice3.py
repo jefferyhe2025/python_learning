@@ -12,7 +12,6 @@ for i in range(100):
 
 """
 从1到100的偶数求和
-
 Version: 1.0
 """
 num2 =0
@@ -24,7 +23,6 @@ for i in range(100):
 
 """
 从1到100的偶数求和
-
 Version: 1.1
 """
 num3 = 0
@@ -35,15 +33,14 @@ for i in range(2,100,2):
 
 """
 从1到100的偶数求和
-
 Version: 1.2
 """
 print(sum(range(2,100,2)))
 
+
 # While循环
 """
 从1到100的整数求和
-
 Version: 1.1
 """
 num4 = 0
@@ -63,12 +60,24 @@ while i <= 100:
     i += 2
 print(total)
 
+
+#Flag（标志）
+prompt = '\nTell me something,and I will repeat it back to you:'
+prompt += "\nEnter 'quit' to end the program. "
+
+active = True # 设置Flag控制程序是否进行
+while active:
+    message = input(prompt)
+
+    if message == 'quit':
+        active =False
+        print('Would you like to replay?')
+    else:
+        print(message)
+
 # break & continue
-
 """
-
 从1到100的偶数求和
-
 Version: 1.4
 """
 total = 0
@@ -80,9 +89,9 @@ while True:
         break
 print(total)
 
+
 """
 从1到100的偶数求和
-
 Version: 1.5
 """
 total = 0
@@ -92,10 +101,10 @@ for i in range(1,101):
     total += i
 print(total)
 
+
 #嵌套循环
 """
 打印乘法口诀表
-
 Version: 1.0
 """
 for i  in range(1,10):
@@ -107,7 +116,6 @@ for i  in range(1,10):
 #循环的应用
 """
 输入一个大于1的正整数判断它是不是素数
-
 Version: 1.0
 """
 num = int(input("请输入一个正整数："))
@@ -125,7 +133,6 @@ else:
 
 """
 输入两个正整数求它们的最大公约数
-
 Version: 1.0
 """
 a = int(input("请输入一个正整数："))
@@ -168,3 +175,33 @@ while True:
         break
 print(f'您一共猜了{count}次')
 
+
+"""
+熟食店
+"""
+sandwich_orders = [
+    "tuna sandwich",
+    "chicken sandwich",
+    "pastrami",
+    "pastrami sandwich",
+    "veggie sandwich",
+    "pastrami",
+    "ham sandwich",
+    "pastrami",
+]
+finished_sandwich = []
+print('I am sorry,we are out of pastrami.')
+
+while "pastrami" in sandwich_orders:
+    sandwich_orders.remove("pastrami")
+
+print()
+while sandwich_orders:
+    sandwich = sandwich_orders.pop()
+    print(f'I am working on  your {sandwich}.')
+    finished_sandwich.append(sandwich)
+
+print()
+print("\nAll sandwiches have been made:")
+for sandwich in finished_sandwich:
+    print(sandwich)
