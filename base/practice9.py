@@ -108,3 +108,55 @@ for ch in sentence:
 sorted_keys = sorted(count,key=count.get,reverse=True)
 for key in sorted_keys:
     print(f'{key}出现的次数：{count[key]}')
+
+"""
+喜欢的地方：创建一个favorite_places的字典，存储三个人的名字作为键，每个人保存1-3个喜欢的地方。
+将每个人的名字及其喜欢的地方打印出来
+"""
+favorite_places = {
+    "Alice": ["Paris", "Tokyo"],
+    "Ben": ["New York"],
+    "Clara": ["London", "Rome", "Sydney"],
+}
+
+for name,places in favorite_places.items():
+    if len(places) > 1:
+        print(f"\n{name}'s favorite places are :")
+        for place in places:
+            print(f'\t{place}')
+    else:
+        print(f"\n{name}'s favorite places is {places[0]}")
+
+"""
+城市
+"""
+
+cities = {
+    "tokyo": {
+        "country": "japan",
+        "population": 14_000_000,
+        "fact": "It is one of the most populous metropolitan areas in the world.",
+    },
+    "paris": {
+        "country": "france",
+        "population": 2_100_000,
+        "fact": "The Eiffel Tower is its most famous landmark.",
+    },
+    "cairo": {
+        "country": "egypt",
+        "population": 10_000_000,
+        "fact": "It is near the ancient Pyramids of Giza.",
+    },
+}
+
+for city,city_infor in cities.items():
+    print(f'name：{city}')
+    country = city_infor['country']
+    population = city_infor['population']
+    fact = city_infor['fact']
+
+    print(f'city_information:\n'
+          f'\tcountry:{country}\n'
+          f'\tpopulation:{population}\n'
+          f'\tfact:{fact}\n')
+    print(f'Boundary'.center(40,'*'))
