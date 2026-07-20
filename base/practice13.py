@@ -219,3 +219,111 @@ stu1.eat()
 stu2.sleep()
 stu3.study('C语言程序设计')
 teacher1.tech('计算机网络原理')
+
+"""
+模拟餐厅
+"""
+
+class Restaurant:
+    """ 模拟餐馆 """
+    def __init__(self,restaurant_name,cuisine_type):
+        """ 餐馆名称和风味 """
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+
+    def describe_restaurant(self):
+        """ 描述餐馆 """
+        print(f'\n{self.restaurant_name}推出超棒{self.cuisine_type}')
+
+    def open_restaurant(self):
+        """ 营业中"""
+        print(f'\n餐厅营业中~')
+
+    def set_number_served(self,num_served):
+        """ 设置就餐人数 """
+        self.number_served = num_served
+        print(f'\n现在有{num_served}人就餐')
+
+    def increment_number_served(self,num):
+        """ 设置新增来店人数"""
+        self.number_served += num
+        print(f'\n新增{num}个就餐人数')
+
+class IceCreamStand(Restaurant):
+    """ 新增冰淇淋小店 """
+    def __init__(self,restaurant_name,cuisine_type='意式冰淇淋'):
+        super().__init__(restaurant_name,cuisine_type)
+        self.flavor = ['vanilla', 'chocolate', 'strawberry', 'matcha']
+
+    def show_flavors(self):
+        print('\n以下是我们的冰淇淋口味：')
+        for flavor in self.flavor:
+            print(f'--{flavor}')
+
+shop1 = IceCreamStand('冰淇淋小店')
+shop1.describe_restaurant()
+shop1.show_flavors()
+
+"""
+类的组合：将大类拆成多个协同工作的小类
+"""
+class User:
+    """ 用户 """
+    def __init__(self,first_name,last_name,age,email,location):
+        """ 用户简介 """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.email = email
+        self.location = location
+        self.login_attempts = 1
+
+    def describe_user(self):
+        """ 打印用户信息摘要 """
+        print(f'\nUsername:{self.first_name} {self.last_name}'
+              f'\nAge:{self.age}'
+              f'\nEmail:{self.email}'
+              f'\nLocation:{self.location}')
+
+    def greet_user(self):
+        """ 向用户推送个性化问候 """
+        print(f'\nHello {self.first_name} {self.last_name}!Welcome back.')
+
+    def increment_login_attempts(self):
+        self.login_attempts += 1
+
+    def reset_login_attempts(self):
+        self.login_attempts = 0
+
+user_1 = User('Jeffery', 'Zhang', 28, 'jeffery@example.com', 'Shanghai')
+user_2 = User('Alice', 'Wang', 25, 'alice@example.com', 'Beijing')
+
+user_1.describe_user()
+user_2.greet_user()
+for _ in range(4):
+    user_1.increment_login_attempts()
+print(f'登录次数为：',user_1.login_attempts)
+user_1.reset_login_attempts()  # 只负责改状态，返回值是 None
+print(f'成功重置登录次数为{user_1.login_attempts}')  # 打印属性，不是方法返回值
+
+
+class Admin(User):
+    """ 管理员 """
+    def __init__(self,first_name,last_name,age,email,location):
+        super().__init__(first_name,last_name,age,email,location)
+        # 管理员权限
+        self.privileges = Privilege()
+
+class Privilege:
+    """ 权限 """
+    def __init__(self):
+        self.privileges =["can add post","can delete post","can ban user"]
+
+    def show_privilege(self):
+        print(f'\n以下是管理员的权限：')
+        for privilege in self.privileges:
+            print(privilege)
+
+admin1 = Admin('Jeffery','He',21,'Jefferyhe@163.com','Changsha')
+admin1.privileges.show_privilege()
