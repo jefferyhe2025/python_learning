@@ -190,18 +190,21 @@ sandwich_orders = [
     "pastrami",
 ]
 finished_sandwich = []
+#五香烟熏牛肉买完了
 print('I am sorry,we are out of pastrami.')
 
 while "pastrami" in sandwich_orders:
     sandwich_orders.remove("pastrami")
 
 print()
+#将所有order中的三明治完成
 while sandwich_orders:
     sandwich = sandwich_orders.pop()
     print(f'I am working on  your {sandwich}.')
     finished_sandwich.append(sandwich)
 
 print()
+#打印完成的三明治
 print("\nAll sandwiches have been made:")
 for sandwich in finished_sandwich:
     print(sandwich)
