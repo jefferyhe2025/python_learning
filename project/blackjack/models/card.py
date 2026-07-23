@@ -12,9 +12,9 @@ class Card:
         _FACES = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         return f'{self.suite.symbol}{_FACES[self.face]}'
 
-    def __lt__(self, other:'Card'):
+    def __lt__(self, other:'Card') -> bool:
         """ 理牌"""
-        if self.suite == other.suite:
+        if self.suite == other.suite: # 花色相同比较牌面
             return self.face < other.face
-        return self.suite.order < other.suite.order
+        return self.suite.order < other.suite.order # 否则比较花色顺序
 
