@@ -9,7 +9,7 @@ class Deck:
         self.cards = [Card(suite,face)
                      for suite in Suite
                      for face in range(1,14)]
-        self.current = 0
+        self.current = 0 #记录发牌的数量
 
     def shuffle(self) -> None:
         """ 洗牌 """
