@@ -55,26 +55,31 @@ class BlackJackGame:
         elif p:
             # 玩家赢
             self._settle(Outcome.BLACKJACK)
+            print('\n玩家自然BlackJack！')
         else:
             # 庄家赢
             self._settle(Outcome.LOSE)
+            print('\n庄家自然BlackJack！')
         return True # 结束
 
     def _player_turn(self):
         """ 玩家回合，True = 爆牌 """
         while True:
             # 临时显示牌面和最佳点数
-            print(self.player.hand.my_card, self.player.hand.best_value())
+            print(f'您的手牌：{self.player.hand.my_card}, 最佳点数：{self.player.hand.best_value()}')
             action = self.ui.ask_hit_or_stand()
             if action == "stand":
                 return False
             self.player.receive_card(self.deck.deal())
             if self.player.hand.is_bust:
+                # 再次显示玩家的牌
+                print(self.player.hand.my_card)
                 return True
 
     def _dealer_turn(self):
         """ 庄家回合 """
         self.dealer.reveal()
+        print("庄家明牌:", self.dealer.hand.my_card[0])
         while self.dealer.should_hit():
             """ 点数不满17，一直hit"""
             self.dealer.receive_card(self.deck.deal())
@@ -128,3 +133,12 @@ class BlackJackGame:
             # 点数相同，平局
             outcome = Outcome.PUSH
         self._settle(outcome) # 结算
+
+    def run(self):
+        """ 多局游戏循环"""
+        while self.player.chips > 0:
+            if not self.ui.ask_continue():
+                print(f"您已退出游戏,剩余筹码{self.player.chips}")
+                return
+            self.play_round()
+        print(f'您已破产，游戏结束！')

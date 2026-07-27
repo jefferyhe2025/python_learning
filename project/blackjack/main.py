@@ -12,7 +12,7 @@ def main():
     ui = ConsoleUI()
 
     game = BlackJackGame(deck,player,dealer,ui)
-    game.play_round()
+    game.run()
 
 if __name__ == "__main__":
     main()
