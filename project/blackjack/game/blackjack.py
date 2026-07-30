@@ -52,37 +52,39 @@ class BlackJackGame:
         if p and d:
             # 平局
             self._settle(Outcome.PUSH)
+            self.ui.show_round_result(Outcome.PUSH,self.bet,self.player.chips)
         elif p:
             # 玩家赢
             self._settle(Outcome.BLACKJACK)
-            print('\n玩家自然BlackJack！')
+            self.ui.show_round_result(Outcome.BLACKJACK,self.bet,self.player.chips,note='玩家自然BlackJack！')
         else:
             # 庄家赢
             self._settle(Outcome.LOSE)
-            print('\n庄家自然BlackJack！')
+            self.ui.show_round_result(Outcome.LOSE,self.bet,self.player.chips,note='庄家自然BlackJack！')
         return True # 结束
 
     def _player_turn(self):
         """ 玩家回合，True = 爆牌 """
         while True:
             # 临时显示牌面和最佳点数
-            print(f'您的手牌：{self.player.hand.my_card}, 最佳点数：{self.player.hand.best_value()}')
+            self.ui.show_table(self.player.hand.my_card,self.player.hand.best_value(),self.dealer.hand.my_card[0])
             action = self.ui.ask_hit_or_stand()
             if action == "stand":
                 return False
             self.player.receive_card(self.deck.deal())
             if self.player.hand.is_bust:
-                # 再次显示玩家的牌
-                print(self.player.hand.my_card)
+                # 再次打印牌桌上的牌
+                self.ui.show_table(self.player.hand.my_card,self.player.hand.best_value(),self.dealer.hand.my_card[0])
                 return True
 
     def _dealer_turn(self):
         """ 庄家回合 """
         self.dealer.reveal()
-        print("庄家明牌:", self.dealer.hand.my_card[0])
+        self.ui.show_dealer_hand(self.dealer.hand.my_card,self.dealer.hand.best_value())
         while self.dealer.should_hit():
             """ 点数不满17，一直hit"""
             self.dealer.receive_card(self.deck.deal())
+            self.ui.show_dealer_hand(self.dealer.hand.my_card, self.dealer.hand.best_value())
 
     def _settle(self,outcome):
         """ 结算bet """
@@ -98,8 +100,6 @@ class BlackJackGame:
         else:
             raise ValueError(outcome)
 
-        print(f"结果：{outcome.name}，本局注：{bet}，剩余筹码：{self.player.chips}")
-
     def play_round(self):
         """ 单局流程"""
         if self.deck.current == 0:
@@ -113,9 +113,8 @@ class BlackJackGame:
         if self._player_turn():
             # 玩家回合
             self._settle(Outcome.LOSE)
-            print('你爆了，扣除赌注！')
+            self.ui.show_round_result(Outcome.LOSE,self.bet,self.player.chips,note='你爆了，扣除赌注！')
             return
-        print('stand,庄家回合')
         self._dealer_turn()
         # 比点数
         pv,dv = self.player.hand.best_value(),self.dealer.hand.best_value()
@@ -132,13 +131,16 @@ class BlackJackGame:
         else:
             # 点数相同，平局
             outcome = Outcome.PUSH
-        self._settle(outcome) # 结算
+        self._settle(outcome)
+        self.ui.show_round_result(outcome, self.bet, self.player.chips)# 结算
 
     def run(self):
         """ 多局游戏循环"""
         while self.player.chips > 0:
             if not self.ui.ask_continue():
-                print(f"您已退出游戏,剩余筹码{self.player.chips}")
+                # 退出游戏
+                self.ui.show_session_end('quit',self.player.chips)
                 return
             self.play_round()
-        print(f'您已破产，游戏结束！')
+        # 玩家破产
+        self.ui.show_session_end('bankrupt',self.player.chips)

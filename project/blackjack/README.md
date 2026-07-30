@@ -2,7 +2,7 @@
 
 基于面向对象编程练习的命令行 21 点小游戏。概念对齐课文「扑克游戏」例一（牌 / 牌堆 / 玩家），按 Blackjack 规则**重写**实现；支持下注、自然 Blackjack、庄家固定规则，以及多局对战（破产或主动退出结束）。
 
-> 当前仓库阶段：**仅提供项目说明与开发者设计文档**，实现代码按 `docs/DESIGN.md` 落地。
+> 当前仓库阶段：**可玩的 CLI 实现已落地**（领域 / 对局 / UI 分层）
 
 ## Features
 
@@ -18,7 +18,7 @@
 ## Requirements
 
 - Python 3.8+
-- 仅使用标准库（计划实现时不引入第三方依赖）
+- 仅使用标准库（不引入第三方依赖）
 
 ## Project Layout
 
@@ -26,17 +26,18 @@
 blackjack/
 ├── README.md                 # 本文件：项目说明
 ├── docs/
-│   └── DESIGN.md             # 开发者设计思路（架构 / 类 / 流程 / 边界）
-├── main.py                   # （待实现）入口
-├── models/                   # （待实现）领域对象
+│   ├── DESIGN.md             # 开发者设计思路（架构 / 类 / 流程 / 边界）
+│   └── PITFALLS.md           # 踩坑笔记
+├── main.py                   # 入口组装
+├── models/                   # 领域对象
 │   ├── suite.py
 │   ├── card.py
 │   ├── deck.py
 │   ├── hand.py
 │   └── player.py
-├── game/                     # （待实现）对局编排
+├── game/                     # 对局编排
 │   └── blackjack.py
-└── ui/                       # （待实现）命令行交互
+└── ui/                       # 命令行交互
     └── console.py
 ```
 
@@ -58,12 +59,14 @@ blackjack/
 
 ## Usage
 
-实现完成后，在项目目录下运行：
+在仓库根目录运行（因导入路径为 `project.blackjack...`）：
 
 ```bash
-cd project/blackjack
-python main.py
+cd /path/to/python_learning
+python -m project.blackjack.main
 ```
+
+或在已配置好 `PYTHONPATH` 指向仓库根的前提下，进入 `project/blackjack` 后执行 `python main.py`。
 
 预期交互（示意）：
 
@@ -76,20 +79,14 @@ Blackjack! 你赢得 150
 是否继续? (y/n):
 ```
 
-## Documentation
-
-| 文档 | 读者 | 内容 |
-|------|------|------|
-| [README.md](README.md) | 使用者 / 浏览仓库的人 | 简介、规则摘要、目录、运行方式 |
-| [docs/DESIGN.md](docs/DESIGN.md) | 开发者 | 架构、类职责、数据流、错误处理、测试与扩展 |
-
 ## Status
 
 - [x] 需求与方案确认（教学增强版 / CLI 模块拆分 / 多局 + 破产结束）
 - [x] 设计文档
-- [ ] 领域模型与对局逻辑实现
-- [ ] 命令行 UI
-- [ ] 基础测试与手工验收
+- [x] 领域模型与对局逻辑实现（`models/` + `game/`）
+- [x] 命令行 UI（`ui/console.py`：询问 / 桌面 / 结算 / 会话结束）
+- [x] 分层检查与展示收拢（非法输入重试在 UI；筹码不变式在 `Player.place_bet`；赔付在 Game；展示走 `show_*`）
+- [x] 基础测试与手工验收（建议对照 `docs/DESIGN.md` §7：非法输入、多局筹码、破产/退出、自然 BJ / 爆牌）
 
 ## License
 
