@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-from random_walk import RadomWalk
+from project.data_viz.data_generation.random_walk.random_walk import RadomWalk
 
 while True:
     # 创建随机行走实例
