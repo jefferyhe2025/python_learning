@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 读取数据
-df = pd.read_csv('sitka_weather_2021_simple.csv')
+df = pd.read_csv('../weather_data/sitka_weather_2021_simple.csv')
 
 # 提取最高温度、最低温度和日期
 high_temp = list(df['TMAX'])
