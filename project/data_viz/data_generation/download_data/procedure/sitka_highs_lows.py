@@ -17,9 +17,10 @@ ax.plot(dates,high_temp,color='red',alpha = 0.6)
 ax.plot(dates,low_temp,color='blue',alpha = 0.6)
 ax.fill_between(dates,high_temp,low_temp,facecolor='blue',alpha = 0.25)
 
-ax.set_title('Daily High and Low Temperatures, 2021',fontsize=24)
+ax.set_title('Daily High and Low Temperatures, 2021',fontsize=20)
 ax.set_xlabel('',fontsize=16)
 ax.set_ylabel('Temperature(F)',fontsize=16)
+ax.set_ylim(0, 140)
 fig.autofmt_xdate()
 ax.tick_params(labelsize=16)
 

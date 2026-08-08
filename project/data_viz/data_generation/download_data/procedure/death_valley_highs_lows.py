@@ -18,6 +18,7 @@ ax.fill_between(dates,high_temp,low_temp,facecolor='blue',alpha = 0.25)
 ax.set_title('Daily High and Low Temperatures, 2021\nDeath Valley,CA',fontsize=18)
 ax.set_xlabel('',fontsize=16)
 ax.set_ylabel('Temperature(F)',fontsize=16)
+ax.set_ylim(0, 140)
 fig.autofmt_xdate()
 ax.tick_params(labelsize=16)
 
